@@ -9,7 +9,6 @@ server = "irc.freenode.net"
 port = 6667
 channel = ""
 botnick = ""
-old_channel = ""
 head_user = ""
 
 time_counter = 0

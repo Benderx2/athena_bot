@@ -7,7 +7,6 @@ import ast
 import signal
 import variables
 import irc
-
 def insert_string(string, new, pos):
 	return string[:pos] + new + string[pos:]
 

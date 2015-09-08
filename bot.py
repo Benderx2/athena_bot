@@ -18,6 +18,7 @@ import ulc
 import utils
 import help
 import parser
+import re
 
 from datetime import datetime
 from datetime import date
@@ -44,8 +45,7 @@ def quit_bot():
 	variables.ircsock.send("QUIT :User Quit\n\r")
 	sys.exit("bot exit")
 
-def main_loop():
-	while 1:
+def main_func():
 		irc_message = variables.ircsock.recv(8192)
 		irc_message = irc_message.strip('\n\r')
 		signal.alarm(0)
@@ -59,9 +59,9 @@ def main_loop():
 				else:
 					variables.channel = mystr['ARGS'][0]
 				if variables.channel == variables.botnick:
-					variables.channel = variables.old_channel
-				else:
-					variables.old_channel = mystr['ARGS'][0]
+					priv_user = mystr['PREFIX']
+					priv_user = priv_user.split('!')
+					variables.channel = priv_user[0]
 				myinput = ""
 				if mystr['ARGS'][1].startswith("ath", 0, len("ath")) == True:
 					mycode = mystr['ARGS'][1].replace("ath", "")
@@ -79,11 +79,32 @@ def main_loop():
 								irc.send_msg("Module not found", variables.channel)
 					else:
 						parser.parse_ath_message(mycode, mystr)
-							
+				# check for any links
+				urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', mystr['ARGS'][1])
+				if len(urls) > 0:
+					i = 0
+					while i < len(urls):
+						try:
+							irc.send_msg("Title: " + utils.get_page_title(urls[i]), variables.channel)
+							i += 1
+						except:
+							irc.send_msg("An error occurred while processing the link.", variables.channel)
+							break
 		if irc_message.find("PING :") != -1:
 			irc.ping()
-	return 0
+		return 0
 
+def main_loop():
+	while 1:
+		try:
+			main_func()
+		except:
+			err = sys.exc_info()
+			exception = sys.exc_info()[0]
+			if exception == KeyboardInterrupt:
+				quit_bot()
+			irc.send_msg("Error! INFO: " + str(err), variables.head_user)
+			irc.send_msg("An error has been reported to the head user. Further details would be disclosed to the public in future. [RESTARTING]", variables.channel)
 #
 #
 # -------------- init code begins here -------------------------------------
@@ -104,15 +125,5 @@ variables.ircsock.send("USER "+ variables.botnick + " " + variables.botnick +" "
 variables.ircsock.send("NICK " + variables.botnick + "\n")
 irc.join_channel(variables.channel)
 signal.signal(signal.SIGALRM, ten_sec_handler)
-try:
-	main_loop()
-except:
-	err = sys.exc_info()
-	exception = sys.exc_info()[0]
-	if exception == KeyboardInterrupt:
-		quit_bot()
-	irc.send_msg("Error! INFO: " + str(err), variables.head_user)
-	irc.send_msg("An error has been reported to the head user. Further details would be disclosed to the public in future. [RESTARTING]", variables.channel)
-	variables.ircsock.send("QUIT :Restarting bot after error\n\r")
-	restart_bot()
+main_loop()
 	

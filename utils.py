@@ -6,6 +6,8 @@ import ast
 import signal
 import irc
 import variables
+import urllib2
+import re
 
 from datetime import datetime
 from datetime import date
@@ -99,5 +101,12 @@ def get_time(arg):
 		irc.send_msg("Output: Time (In " + arg + ") " + the_time.strftime('%Y/%m/%d - %H:%M:%S') + ": UTC " + pytz.timezone(arg).localize(datetime(date.today().year,date.today().month,date.today().day)).strftime('%z'), variables.channel)
 	except (pytz.exceptions.UnknownTimeZoneError):
 		irc.send_msg("Unknown Time zone.", variables.channel)
+
+def get_page_title(pageurl):
+	mypage = urllib2.urlopen(pageurl)
+	titleRE = re.compile("<title>(.+?)</title>")
+	title = titleRE.search(mypage.read().replace("\r", "").replace("\n", "")).group(1)
+	return title
+
 def test():
 	irc.send_msg("Acknowledge.", variables.channel)
