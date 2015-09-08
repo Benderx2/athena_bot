@@ -26,6 +26,16 @@ import pytz
 
 import operator as op
 
+def check_if_unicode(string):
+	try:
+		string.decode('utf-8')
+   		return True
+	except UnicodeError:
+    		return False
+
+def unicode_len(string):
+	return len(string.decode('utf-8'))
+
 def imports():
     for name, val in globals().items():
         if isinstance(val, types.ModuleType):
@@ -66,7 +76,7 @@ def parse_ath_message(mycode, mystr):
 			user = mystr['PREFIX']
 			user = user.split('!')
 			if user[0] != variables.head_user:
-				irc.send_msg("You need to be: " + variables.head_user + " to make me join a channel", variables.hannel)	
+				irc.send_msg("You need to be: " + variables.head_user + " to make me join a channel", variables.channel)	
 			else:
 				mychan = mycode.replace(".join", "")
 				mychan = mychan.replace(" ", "")
@@ -79,7 +89,7 @@ def parse_ath_message(mycode, mystr):
 			user = mystr['PREFIX']
 			user = user.split('!')
 			if user[0] != variables.head_user:
-				irc.send_msg("You need to be: " + variables.head_user + " to make me leave a channel", variables.hannel)	
+				irc.send_msg("You need to be: " + variables.head_user + " to make me leave a channel", variables.channel)	
 			else:
 				mychan = mycode.replace(".join", "")
 				mychan = mychan.replace(" ", "")
@@ -92,7 +102,12 @@ def parse_ath_message(mycode, mystr):
 			utils.get_time(mycode)
 		elif mycode.startswith(".ccount ", 0, 8) == True:
 			mycode = mycode.replace(".ccount ", "")
-			irc.send_msg("Length: " + str(len(mycode)), variables.channel)
+			length = 0
+			if check_if_unicode(mycode) == True:
+				length = unicode_len(mycode)
+			else:
+				length = len(mycode)
+			irc.send_msg("Length: " + str(length), variables.channel)
 		elif mycode.startswith(".help", 0, 5) == True:
 			irc.send_msg(help.athena_help, variables.channel)
 		elif mycode.startswith(".list", 0, 5):

@@ -84,8 +84,12 @@ def main_loop():
 			irc.ping()
 	return 0
 
-print sys.argv
-print len(sys.argv)
+#
+#
+# -------------- init code begins here -------------------------------------
+#
+#
+
 if len(sys.argv) != 4:
 	print "I expect the following arguments: python bot.py [your nick] [channel to join] [bot nick]"
 	sys.exit("less/too many arguments given")
