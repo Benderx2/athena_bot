@@ -5,7 +5,7 @@ Athena is a small IRC bot generally designed to be utilitarian features. It's ma
 esoteric languages (current implementation includes brainf**k, unefunge, and underload). However it supports additional
 features such as expression evaluator; character counter; time display; decimal, binary, hexadecimal interconverter.
 
-It only requires the 'pytz' library, which can be feteched (on Ubuntu/Debian) using:
+It only requires the 'pytz' library, which can be fetched (on Ubuntu/Debian) using:
 
 ```
 apt-get install python-tz
@@ -13,7 +13,7 @@ apt-get install python-tz
 
 Simply run the script using:
 
-./execute.sh "<your IRC user name>" "<initial channel to join>" "<bot nick>"
+./execute.sh "your IRC user name" "initial channel to join" "bot nick"
 
 Messaging 'ath.help' will list all the possible commands that can be passed to Athena.
 
