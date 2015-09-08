@@ -13,7 +13,7 @@ apt-get install python-tz
 
 Simply run the script using:
 
-python bot.py "<your IRC user name>" "<initial channel to join>" "<bot nick>"
+./execute.sh "<your IRC user name>" "<initial channel to join>" "<bot nick>"
 
 Messaging 'ath.help' will list all the possible commands that can be passed to Athena.
 

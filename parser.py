@@ -97,5 +97,5 @@ def parse_ath_message(mycode, mystr):
 			irc.send_msg(help.athena_help, variables.channel)
 		elif mycode.startswith(".list", 0, 5):
 			irc.send_msg("List of modules: " + str(list(imports())), variables.channel)	
-		elif mycode.startswtiH(".source", 0, 7):
+		elif mycode.startswith(".source", 0, 7):
 			irc.send_msg("https://github.com/Benderx2/athena_bot", variables.channel)
