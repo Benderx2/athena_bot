@@ -91,7 +91,7 @@ def parse_ath_message(mycode, mystr):
 			if user[0] != variables.head_user:
 				irc.send_msg("You need to be: " + variables.head_user + " to make me leave a channel", variables.channel)	
 			else:
-				mychan = mycode.replace(".join", "")
+				mychan = mycode.replace(".leave", "")
 				mychan = mychan.replace(" ", "")
 				if mychan == "0":
 					irc.send_msg(variables.i_hate_you, variables.channel)

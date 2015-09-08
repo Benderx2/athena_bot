@@ -18,7 +18,7 @@ def join_channel(chan):
 	variables.ircsock.send("JOIN " + chan + "\n")
 
 def leave_channel(chan):
-	variables.ircsock.send("LEAVE " + chan + "\n")
+	variables.ircsock.send("PART " + chan + "\n")
 
 def process_output(output):
 	global channel
