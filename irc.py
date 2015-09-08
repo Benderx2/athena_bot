@@ -25,7 +25,7 @@ def process_output(output):
 	i = 0
 	while i < len(output):
 		if output[i] == '\n' or output[i] == '\r' or output[i] == u'\n' or output[i] == u'\r':
-			send_msg("WARNING: Output contains newline (0x0A).", channel)
+			send_msg("WARNING: Output contains newline (0x0A).", variables.channel)
 			return output.replace("\n", "").replace("\r", "")
 		i += 1
 	return output

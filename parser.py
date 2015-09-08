@@ -97,7 +97,6 @@ def parse_ath_message(mycode, mystr):
 					irc.send_msg(variables.i_hate_you, variables.channel)
 				else:
 					irc.leave_channel(mychan)
-
 		elif mycode.startswith(".time", 0, 5) == True:
 			utils.get_time(mycode)
 		elif mycode.startswith(".ccount ", 0, 8) == True:
