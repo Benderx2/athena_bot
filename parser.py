@@ -42,15 +42,15 @@ def imports():
             yield val.__name__
 
 def parse_ath_message(mycode, mystr):
-		if mycode.startswith(".bf", 0, 3) == True:
+		if mycode.startswith(".bf ", 0, 4) == True:
 			mycode = mycode.replace(".bf ", "")
 			irc.send_msg(bfc.compile_bf(mycode), variables.channel)
 			signal.alarm(0)
-		elif mycode.startswith(".be", 0, 3) == True:
+		elif mycode.startswith(".be ", 0, 4) == True:
 			mycode = mycode.replace(".be ", "")
 			irc.send_msg(bec.compile_be(mycode), variables.channel)
 			signal.alarm(0)
-		elif mycode.startswith(".ul", 0, 3) == True:
+		elif mycode.startswith(".ul ", 0, 4) == True:
 			print mycode
 			mycode = mycode.replace(".ul ", "")
 			irc.send_msg(ulc.compile_ul(mycode), variables.channel)

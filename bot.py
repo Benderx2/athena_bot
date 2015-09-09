@@ -90,7 +90,8 @@ def main_func():
 						except:
 							irc.send_msg("An error occurred while processing the link.", variables.channel)
 							break
-		if irc_message.find("PING :") != -1:
+		if mystr['COMMAND'] == "PING":
+			print "PING"
 			irc.ping()
 		return 0
 
