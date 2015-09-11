@@ -34,14 +34,14 @@ def load_comics():
 		# read it all!
 		comics_titles = open("xkcdtitles.txt", 'rb').read().split("\n")
 		comics_titles.pop()
-		total_current_titles = len(comics_titles)-1
-		i = len(comics_titles)-1
+		total_current_titles = len(comics_titles)
+		i = len(comics_titles)
 	print "Total comics in database: " + str(i) + "\nTotal Comics Online: " + str(latest_index_num)
-	i += 1
 	while i <= latest_index_num:
 		try:
 			json_data = urllib2.urlopen(xkcd_url + str(i) + json_fil).read().replace("\n", "").replace("\r", "").replace("'", "")
 			topic_title = json.loads(json_data)['title']
+			print topic_title
 		except:
 			exception = sys.exc_info()[0]
 			if exception == KeyboardInterrupt:
