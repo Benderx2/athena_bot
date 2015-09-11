@@ -98,7 +98,7 @@ def parse_ath_message(mycode, mystr):
 					irc.send_msg(variables.i_hate_you, variables.channel)
 				else:
 					irc.leave_channel(mychan)
-		elif mycode.startswith(".time", 0, 5) == True:
+		elif mycode.startswith(".time ", 0, 6) == True:
 			utils.get_time(mycode)
 		elif mycode.startswith(".ccount ", 0, 8) == True:
 			mycode = mycode.replace(".ccount ", "")
@@ -112,7 +112,12 @@ def parse_ath_message(mycode, mystr):
 			irc.send_msg(help.athena_help, variables.channel)
 		elif mycode.startswith(".list", 0, 5):
 			irc.send_msg("List of modules: " + str(list(imports())), variables.channel)	
-		elif mycode.startswith(".xkcd", 0, 5):
+		elif mycode.startswith(".xkcd ", 0, 6):
 			irc.send_msg(xkcd.search_xkcd(mycode.replace(".xkcd ", "")), variables.channel)
+		elif mycode.startswith(".tr ", 0, 4):
+			mycode = mycode.replace(".tr ", "")
+			lang = mycode[:2]
+			mycode = mycode.replace(lang, "")
+			irc.send_msg(utils.translate_lang(lang, mycode), variables.channel)
 		elif mycode.startswith(".source", 0, 7):
 			irc.send_msg("https://github.com/Benderx2/athena_bot", variables.channel)

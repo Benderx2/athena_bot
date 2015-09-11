@@ -8,6 +8,7 @@ import irc
 import variables
 import urllib2
 import re
+import goslate
 
 from datetime import datetime
 from datetime import date
@@ -18,6 +19,7 @@ import pytz
 
 import operator as op
 
+gs = goslate.Goslate()
 operators = { 	ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul, ast.Div: op.truediv, ast.Pow: op.pow, ast.BitXor: op.xor, ast.USub: op.neg, 
 	 	ast.BitOr: op.or_, ast.LShift: op.lshift, ast.RShift: op.rshift, ast.Mod: op.mod, ast.BitAnd: op.and_, ast.Invert: op.invert,
 		ast.Eq: op.eq, ast.Lt: op.lt, ast.LtE: op.le, ast.NotEq: op.ne, ast.Gt: op.gt, ast.GtE: op.ge,  }
@@ -107,6 +109,12 @@ def get_page_title(pageurl):
 	titleRE = re.compile("<title>(.+?)</title>")
 	title = titleRE.search(mypage.read().replace("\r", "").replace("\n", "")).group(1)
 	return title
-
+	
+def translate_lang(language, text):
+	try:
+		return gs.translate(text, language)
+	except:
+		return "Error during translation"
+		
 def test():
 	irc.send_msg("Acknowledge.", variables.channel)

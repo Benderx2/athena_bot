@@ -3,7 +3,7 @@ Athena
 
 Athena is a small IRC bot generally designed to be utilitarian features. It's main purpose is to interpret various
 esoteric languages (current implementation includes brainf**k, unefunge, and underload). However it supports additional
-features such as expression evaluator; character counter; time display; decimal, binary, hexadecimal interconverter and an XKCD browser!
+features such as expression evaluator; character counter; time display; decimal, binary, hexadecimal interconverter, a language translator and an XKCD browser!
 
 It only requires the 'pytz' library, which can be fetched (on Ubuntu/Debian) using:
 
