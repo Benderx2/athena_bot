@@ -16,6 +16,7 @@ import bec
 import ulc
 import utils
 import help
+import xkcd
 
 from datetime import datetime
 from datetime import date
@@ -111,5 +112,7 @@ def parse_ath_message(mycode, mystr):
 			irc.send_msg(help.athena_help, variables.channel)
 		elif mycode.startswith(".list", 0, 5):
 			irc.send_msg("List of modules: " + str(list(imports())), variables.channel)	
+		elif mycode.startswith(".xkcd", 0, 5):
+			irc.send_msg(xkcd.search_xkcd(mycode.replace(".xkcd ", "")), variables.channel)
 		elif mycode.startswith(".source", 0, 7):
 			irc.send_msg("https://github.com/Benderx2/athena_bot", variables.channel)
