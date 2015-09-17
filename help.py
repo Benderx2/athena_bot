@@ -1,1 +1,1 @@
-athena_help = "Athena, Version: 0.97b ---- Codename: Twisty Turtle. Commands: ath.bf, ath.be, ath.ul, ath.eval, ath.join <channel>, ath.[d,b,h]2[d,b,h], ath.ccount, ath.time, ath.list, ath.leave, ath.reload, ath.source, ath.xkcd, ath.tr"
+athena_help = "Athena, Version: 0.97b ---- Codename: Twisty Turtle. Commands: ath.bf, ath.df,  ath.be, ath.ul, ath.eval, ath.join, ath.[d,b,h]2[d,b,h], ath.ccount, ath.time, ath.list, ath.leave, ath.reload, ath.source, ath.xkcd, ath.tr, ath.bftxt"

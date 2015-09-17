@@ -127,4 +127,4 @@ variables.ircsock.send("NICK " + variables.botnick + "\n")
 irc.join_channel(variables.channel)
 signal.signal(signal.SIGALRM, ten_sec_handler)
 main_loop()
-	
+

@@ -17,6 +17,8 @@ import ulc
 import utils
 import help
 import xkcd
+import bftxt
+import deadfish
 
 from datetime import datetime
 from datetime import date
@@ -119,5 +121,11 @@ def parse_ath_message(mycode, mystr):
 			lang = mycode[:2]
 			mycode = mycode.replace(lang, "")
 			irc.send_msg(utils.translate_lang(lang, mycode), variables.channel)
+		elif mycode.startswith(".bftxt ", 0, 7):
+			mycode = mycode.replace(".bftxt ", "")
+			irc.send_msg("Output: " + bftxt.bf(mycode), variables.channel)
+		elif mycode.startswith(".df ", 0, 4):
+			mycode = mycode.replace(".df ", "")
+			irc.send_msg("Output: " + deadfish.compile_df(mycode), variables.channel)
 		elif mycode.startswith(".source", 0, 7):
 			irc.send_msg("https://github.com/Benderx2/athena_bot", variables.channel)
