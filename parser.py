@@ -115,7 +115,7 @@ def parse_ath_message(mycode, mystr):
 		elif mycode.startswith(".list", 0, 5):
 			irc.send_msg("List of modules: " + str(list(imports())), variables.channel)	
 		elif mycode.startswith(".xkcd ", 0, 6):
-			irc.send_msg(xkcd.search_xkcd(mycode.replace(".xkcd ", "")), variables.channel)
+			irc.send_msg(u'\u200b' + xkcd.search_xkcd(mycode.replace(".xkcd ", "")), variables.channel)
 		elif mycode.startswith(".tr ", 0, 4):
 			mycode = mycode.replace(".tr ", "")
 			lang = mycode[:2]
@@ -128,4 +128,4 @@ def parse_ath_message(mycode, mystr):
 			mycode = mycode.replace(".df ", "")
 			irc.send_msg("Output: " + deadfish.compile_df(mycode), variables.channel)
 		elif mycode.startswith(".source", 0, 7):
-			irc.send_msg("https://github.com/Benderx2/athena_bot", variables.channel)
+			irc.send_msg(u"\u200bhttps://github.com/Benderx2/athena_bot", variables.channel)

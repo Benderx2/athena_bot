@@ -80,16 +80,17 @@ def main_func():
 					else:
 						parser.parse_ath_message(mycode, mystr)
 				# check for any links
-				urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', mystr['ARGS'][1])
-				if len(urls) > 0:
-					i = 0
-					while i < len(urls):
-						try:
-							irc.send_msg("Title: " + utils.get_page_title(urls[i]), variables.channel)
-							i += 1
-						except:
-							irc.send_msg("An error occurred while processing the link.", variables.channel)
-							break
+				if variables.channel == "#osdev-offtopic":
+					urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', mystr['ARGS'][1])
+					if len(urls) > 0:
+						i = 0
+						while i < len(urls):
+							try:
+								irc.send_msg("Title: " + utils.get_page_title(urls[i]), variables.channel)
+								i += 1
+							except:
+								irc.send_msg("An error occurred while processing the link.", variables.channel)
+								break
 		if mystr['COMMAND'] == "PING":
 			print "PING"
 			irc.ping()
